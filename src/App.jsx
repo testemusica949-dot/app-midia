@@ -41,8 +41,14 @@ function App() {
     window.location.reload();
   };
 
-  const uploadArquivo = async (file) => {
-    if (!file) return;
+  const uploadMultiplos = async (files) => {
+  if (!files.length) return;
+
+  for (const file of files) {
+    if (file.size > 50 * 1024 * 1024) {
+      alert(`Arquivo ${file.name} muito grande`);
+      continue;
+    }
 
     const filePath = `${pastaAtual}/${Date.now()}-${file.name}`;
 
@@ -51,13 +57,12 @@ function App() {
       .upload(filePath, file, { upsert: true });
 
     if (error) {
-      console.log(error);
-      alert("Erro no upload");
-      return;
+      console.log("Erro:", error);
     }
+  }
 
-    listarArquivos();
-  };
+  listarArquivos();
+};
 
   const deletarArquivo = async (nomeArquivo) => {
     await supabase.storage.from("midia").remove([nomeArquivo]);
@@ -168,10 +173,10 @@ function App() {
               <label style={styles.uploadButton}>
                 📤 Enviar
                 <input
-                  type="file"
-                  hidden
-                  onChange={(e) => uploadArquivo(e.target.files[0])}
-                />
+  type="file"
+  multiple
+  onChange={(e) => uploadMultiplos(e.target.files)}
+/>
               </label>
             </div>
           </div>
