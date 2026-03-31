@@ -239,23 +239,30 @@ const styles = {
   container: {
     display: "flex",
     height: "100vh",
+    flexDirection: window.innerWidth < 768 ? "column" : "row",
     background: "#020617",
     color: "#fff",
+    overflow: "hidden",
   },
 
   sidebar: {
-    width: 260,
-    padding: 20,
-    background: "rgba(15,23,42,0.9)",
+    width: window.innerWidth < 768 ? "100%" : 260,
     display: "flex",
-    flexDirection: "column",
+    flexDirection: window.innerWidth < 768 ? "row" : "column",
+    overflowX: window.innerWidth < 768 ? "auto" : "hidden",
+    padding: 10,
+    background: "rgba(15,23,42,0.9)",
+    borderBottom: window.innerWidth < 768 ? "1px solid #1e293b" : "none",
+    borderRight: window.innerWidth >= 768 ? "1px solid #1e293b" : "none",
   },
 
   pasta: {
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 8,
+    padding: "10px 14px",
     cursor: "pointer",
+    borderRadius: 10,
+    marginRight: 8,
+    whiteSpace: "nowrap",
+    fontSize: window.innerWidth < 768 ? 14 : 16,
   },
 
   main: {
@@ -264,41 +271,34 @@ const styles = {
   },
 
   content: {
-    padding: 30,
+    width: "100%",
+    padding: window.innerWidth < 768 ? 15 : 30,
   },
 
   top: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 20,
     flexWrap: "wrap",
-  },
-
-  inputBusca: {
-    padding: 10,
-    borderRadius: 10,
-    border: "none",
-  },
-
-  uploadButton: {
-    background: "#22c55e",
-    padding: "10px 15px",
-    borderRadius: 10,
-    cursor: "pointer",
+    gap: 10,
   },
 
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-    gap: 20,
+    gridTemplateColumns:
+      window.innerWidth < 768
+        ? "repeat(2, 1fr)"
+        : "repeat(auto-fill, minmax(240px, 1fr))",
+    gap: 12,
   },
 
   card: {
-    padding: 10,
+    background: "rgba(255,255,255,0.05)",
+    backdropFilter: "blur(10px)",
+    padding: 8,
     borderRadius: 12,
-    background: "#0f172a",
     cursor: "pointer",
-    transition: "0.2s",
   },
 
   media: {
@@ -307,37 +307,40 @@ const styles = {
   },
 
   delete: {
-    marginTop: 5,
+    marginTop: 6,
     width: "100%",
     background: "#ef4444",
     border: "none",
     padding: 6,
-    borderRadius: 6,
+    borderRadius: 8,
     color: "#fff",
+    fontSize: 12,
   },
 
-  download: {
-    display: "block",
-    marginTop: 5,
-    textAlign: "center",
-    background: "#3b82f6",
-    padding: 6,
-    borderRadius: 6,
+  logout: {
+    marginTop: window.innerWidth < 768 ? 0 : "auto",
+    marginLeft: window.innerWidth < 768 ? 10 : 0,
+    background: "#ef4444",
+    border: "none",
+    padding: 8,
+    borderRadius: 8,
     color: "#fff",
-    textDecoration: "none",
   },
 
   modal: {
     position: "fixed",
-    inset: 0,
-    background: "rgba(0,0,0,0.9)",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    background: "rgba(0,0,0,0.95)",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
 
   modalMedia: {
-    maxWidth: "90%",
+    maxWidth: "95%",
     maxHeight: "90%",
   },
 
@@ -346,15 +349,15 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     height: "100vh",
+    background: "linear-gradient(135deg, #020617, #0f172a)",
   },
 
   loginBox: {
+    width: "90%",
+    maxWidth: 320,
+    background: "rgba(255,255,255,0.05)",
     padding: 20,
-    background: "#111",
-    borderRadius: 10,
-    display: "flex",
-    flexDirection: "column",
-    gap: 10,
+    borderRadius: 12,
   },
 };
 
